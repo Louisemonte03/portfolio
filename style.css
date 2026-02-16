@@ -1,0 +1,315 @@
+:root {
+  /* Colors */
+  --bg-color: #121212;
+  --text-primary: #ffffff;
+  --text-secondary: #a8a8a8; /* Voor subtielere tekst, zoals captions */
+  --background-btn-tool: #191919;
+
+  /* Accent color (optioneel, maar handig voor links/knoppen) */
+  --accent-color: #007bff;
+
+  /* Spacing & Borders */
+  --border-color: #333333;
+  --radius: 10px;
+  --radius-btn: 50px;
+
+  /* font weight */
+  --font-weight: 200;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* hier komt de navbar sectie */
+header {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(18, 18, 18, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 20px 0;
+}
+header nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+header nav ul li:first-child {
+  margin-right: auto;
+}
+
+header nav ul li:last-child {
+  margin-left: auto;
+}
+
+header nav ul li {
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+header nav ul li a:hover {
+  color: var(--text-primary);
+}
+
+header nav ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--text-primary);
+
+  transition: width 0.2s ease-in-out;
+}
+
+header nav ul li a:hover::after {
+  width: 100%;
+}
+
+header nav ul li button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+header nav ul li button:hover {
+  transform: scale(1.05);
+}
+
+.hero {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Linkerkant */
+.image-container {
+  flex: 1;
+  height: 100%;
+  animation: fadeInFromLeft 1.2s ease-out forwards;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Rechterkant */
+.text-hero {
+  flex: 1;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInFrombottom 1.2s ease-out forwards;
+}
+
+.content-inner {
+  max-width: 500px;
+}
+
+h1 {
+  font-size: 4rem;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  font-weight: 200;
+  opacity: 0;
+  animation: fadeInFromBottom 1s ease-out forwards;
+}
+
+.text-hero p {
+  color: #b3b3b3;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  opacity: 0;
+  font-weight: var(--font-weight);
+  animation: fadeInFromBottom 1s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+.btn-more {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeInFromBottom 1s ease-out forwards;
+  animation-delay: 0.4s;
+  /* animation-delay: 0.8s; */
+}
+
+.btn-more:hover {
+  transform: scale(1.05);
+}
+
+/* hier komt fade in image */
+@keyframes fadeInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* hier komt de selectie van al het werk */
+
+.intro-projects {
+  padding: 50px 100px;
+}
+
+.intro-projects p {
+  color: var(--text-secondary);
+  font-weight: 100;
+  font-size: 14px;
+  text-align: justify;
+}
+
+.intro-projects h2 {
+  font-size: 45px;
+  font-weight: 200;
+  line-height: 0;
+}
+
+.projects ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.projects li {
+  list-style: none;
+}
+.projects img {
+  width: 600px;
+  height: auto;
+  border-radius: var(--radius);
+}
+.work-projects {
+  padding: 100px;
+}
+
+/* hier komt het about gedeelte */
+
+.about {
+  display: flex;
+  gap: 50px;
+  
+}
+
+.about img {
+  width: 100vh;
+}
+
+.about p {
+  color: var(--text-secondary);
+  font-weight: var(--font-weight);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.about h3 {
+  font-size: 40px;
+  font-weight: var(--heading-font-weight);
+  margin: 10px 0;
+}
+
+.about h4 {
+  font-size: 25px;
+  font-weight: var(--heading-font-weight);
+}
+
+.about-text {
+  max-width: 600px;
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: justify;
+}
+
+/* 
+hier komt de toolkit  */
+
+.toolkit button p {
+  color: var(--text-primary);
+  font-size: 14px;
+}
+.toolkit button {
+  color: var(--text-primary);
+  background-color: var(--background-btn-tool);
+  border: rgb(58, 58, 58) solid 0.5px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 5px 15px;
+  width: 160px;
+  height: 54px;
+  cursor: pointer;
+}
+
+.toolkit ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.toolkit img {
+  width: 20px;
+}
+
+.toolkit button:hover {
+  background-color: rgb(34, 34, 34);
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}

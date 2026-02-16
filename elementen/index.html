@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e0e0e0;
+            margin: 0;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        /* De onzichtbare hitbox die niet beweegt */
+        .kaart-houder {
+            width: 350px;
+            height: 200px;
+            perspective: 1000px;
+        }
+
+        /* De kaart die wel beweegt */
+        .kaart {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #222 0%, #444 100%);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            
+            transform-style: preserve-3d;
+            /* De 'transition' zorgt voor die smooth feel als je stopt */
+            transition: transform 0.15s ease-out; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            pointer-events: none; /* Zorgt dat de kaart de muis-events niet verstoort */
+        }
+
+        .kaart h2 {
+            margin: 0;
+            font-size: 22px;
+            transform: translateZ(60px); /* Meer diepte */
+        }
+
+        .info {
+            transform: translateZ(40px);
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<div class="kaart-houder" id="box">
+    <div class="kaart" id="mijnKaart">
+        <div>
+            <h2>Life List 2026</h2>
+            <div class="info">Creativity & Sports</div>
+        </div>
+        <div class="info">IJsselstein, NL</div>
+    </div>
+</div>
+
+<script>
+    const kaart = document.getElementById('mijnKaart');
+    const houder = document.getElementById('box');
+
+    houder.addEventListener('mousemove', (e) => {
+        const rect = houder.getBoundingClientRect();
+        
+        // Precieze muispositie binnen de houder
+        const x = e.clientX - rect.left; 
+        const y = e.clientY - rect.top;
+        
+        const middenX = rect.width / 2;
+        const middenY = rect.height / 2;
+
+        // Bereken rotatie: hoe verder van het midden, hoe groter de hoek
+        // We beperken het tot 20 graden voor stabiliteit
+        const rotatieY = ((x - middenX) / middenX) * 20;
+        const rotatieX = ((y - middenY) / middenY) * -20;
+
+        kaart.style.transform = `rotateX(${rotatieX}deg) rotateY(${rotatieY}deg)`;
+    });
+
+    // Keert rustig terug naar het midden
+    houder.addEventListener('mouseleave', () => {
+        kaart.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+        kaart.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    });
+
+    // Zorg dat hij weer snel reageert als je er weer op gaat
+    houder.addEventListener('mouseenter', () => {
+        setTimeout(() => {
+            kaart.style.transition = "transform 0.1s ease-out";
+        }, 10);
+    });
+</script>
+
+</body>
+</html>
